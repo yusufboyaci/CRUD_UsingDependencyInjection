@@ -1,3 +1,4 @@
+using CRUD_UsingDependencyInjection.Models.AdoNet;
 using CRUD_UsingDependencyInjection.Models.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +8,9 @@ IServiceCollection s = builder.Services;
 // Add services to the container.
 s.AddControllersWithViews();
 s.AddDbContext<AppDbContext>(o => o.UseSqlServer("Server=.;database=WEBdb;uid=yusuf;pwd=123"));
+s.AddScoped<Connection>();
+s.AddScoped<DAL>();
+s.AddScoped<Logic>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -26,6 +30,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Crud}/{action=OnPost}/{id?}");
 
 app.Run();
